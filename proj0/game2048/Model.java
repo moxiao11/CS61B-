@@ -175,11 +175,14 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
-        for(Tile t : b)
+        for(int x = 0; x < b.size() ; x ++ )
         {
-            if (t == null)
+            for(int y = 0; y < b.size() ; y ++ )
             {
-                return  true ;
+                if (b.tile(x,y) == null)
+                {
+                    return true ;
+                }
             }
         }
         return false;
@@ -192,9 +195,20 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
-        for(Tile t : b)
+        for(int x = 0 ; x < b.size(); x ++ )
         {
-            if(t != null && t.value() == MAX_PIECE) return true ;
+            for(int y = 0;y < b.size(); y ++ )
+            {
+                Tile t = b.tile(x, y);
+                if ( t == null)
+                {
+                    continue ;
+                }
+                if (t.value() == MAX_PIECE)
+                {
+                    return true ;
+                }
+            }
         }
         return false;
     }
@@ -207,7 +221,14 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
-        if(emptySpaceExists(b) || mergeMoveExists(b)) return true  ;
+        if(emptySpaceExists(b)) return true  ;
+        for(int x = 0 ; x < b.size() ; x++ )
+        {
+            for(int y = 0; y < b.size() ;y ++ )
+            {
+                if(adjacentTile(b ,x, y )) return true ;
+            }
+        }
         return false;
     }
     public static boolean adjacentTile(Board b , int x ,int y)
@@ -230,23 +251,8 @@ public class Model extends Observable {
         }
         return false ;
     }
-    private static boolean mergeMoveExists(Board b) {
-        int[][] neighbors = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // 上下左右
-        int len = b.size();
-        for (Tile t : b) {
-            int c = t.col();    // x
-            int r = t.row();    // y
-            for (int i = 0; i < 4; i++) {
-                int nc = c + neighbors[i][0];
-                int nr = r + neighbors[i][1];
-                if ((0 <= nc && nc < len) && (0 <= nr && nr < len)
-                        && (b.tile(nr, nc).value() == t.value())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+
+
     @Override
      /** Returns the model as a string, used for debugging. */
     public String toString() {
