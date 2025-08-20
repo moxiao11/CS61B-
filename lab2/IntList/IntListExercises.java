@@ -66,17 +66,17 @@ public class IntListExercises {
      * @return True if there was an update to the list
      */
     public static boolean squarePrimes(IntList lst) {
-        // Base Case: we have reached the end of the list
         if (lst == null) {
             return false;
         }
 
         boolean currElemIsPrime = Primes.isPrime(lst.first);
-
         if (currElemIsPrime) {
             lst.first *= lst.first;
         }
-        squarePrimes(lst.rest);
-        return currElemIsPrime ;
+        boolean restElemIsPrime= squarePrimes(lst.rest);
+        // 合并当前节点和剩余链表的判断
+        return currElemIsPrime || restElemIsPrime ;
     }
+
 }
