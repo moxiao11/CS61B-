@@ -26,17 +26,18 @@ public class TimeAList {
         AList<Integer> Ns  = new AList<>();
         AList<Double>times = new AList<>();
         AList<Integer> opCount = new AList<>();
+        int n = 1000 ;
         for(int j = 0 ; j < 8 ; j++ ) {
             AList<Integer> temp  = new AList<>();
-            int len = 1000 * (int)Math.pow(2 , j);
             Stopwatch sw = new Stopwatch();
-            for (int i = 0; i < len; i++) {
+            for (int i = 0; i < n; i++) {
                 temp.addLast(i);
             }
             double timeInseconds= sw.elapsedTime();
-            Ns.addLast(len);
+            Ns.addLast(n);
             times.addLast(timeInseconds);
-            opCount.addLast(len);
+            opCount.addLast(n);
+            n *= 2 ;
         }
         printTimingTable(Ns, times ,opCount);
     }
