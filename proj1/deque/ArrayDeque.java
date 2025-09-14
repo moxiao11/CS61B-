@@ -1,6 +1,5 @@
 package deque;
 
-import net.sf.saxon.functions.Minimax;
 
 import java.util.Iterator;
 
@@ -26,14 +25,14 @@ public class ArrayDeque<T> implements Deque<T> , Iterable<T> {
             return get(index++);
         }
     }
-    ArrayDeque() {
+    public ArrayDeque() {
         items = (T[]) new Object[Max_space];
         size = 0;
         nextFirst = 3;
         nextLast = 4;
     }
 
-    ArrayDeque(T x) {
+    public ArrayDeque(T x) {
         items = (T[]) new Object[Max_space];
         size = 1;
         nextFirst = 2;

@@ -21,13 +21,13 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private Node sentinel ;
     private int size;
 
-    LinkedListDeque(){
+    public LinkedListDeque(){
         sentinel = new Node(null , null , null) ;
         last = sentinel;
         size = 0;
     }
 
-    LinkedListDeque(T x)
+    public LinkedListDeque(T x)
     {
         sentinel = new Node(null , null, null ) ;
         sentinel.next = new Node(x , null, sentinel) ;
