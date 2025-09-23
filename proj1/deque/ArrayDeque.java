@@ -31,7 +31,6 @@ public class ArrayDeque<T> implements Deque<T> , Iterable<T> {
         nextFirst = 3;
         nextLast = 4;
     }
-
     public ArrayDeque(T x) {
         items = (T[]) new Object[Max_space];
         size = 1;
