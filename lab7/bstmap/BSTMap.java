@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
-public class BSTMap<K extends Comparable<K>,V> implements Map61B<K,V> ,Iterable<K> {
+public class BSTMap<K extends Comparable<K>,V> implements Map61B<K,V>{
     private BSTNode root ;
     /** Removes all of the mappings from this map. */
     private class BSTNode
@@ -143,8 +143,17 @@ public class BSTMap<K extends Comparable<K>,V> implements Map61B<K,V> ,Iterable<
     public Set<K> keySet(){
         if(root == null) return null ;
         Set<K> set = new HashSet<>() ;
-        for (K k : this) {
-            set.add(k);
+        LinkedList<BSTNode> list = new LinkedList<>() ;
+        list.addLast(root);
+        while(!list.isEmpty())
+        {
+            BSTNode temp = list.removeFirst() ;
+            if(temp == null) {
+                continue ;
+            }
+            list.addLast(root.left);
+            list.addLast(root.right);
+            set.add(temp.key);
         }
         return set ;
     }
